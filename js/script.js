@@ -3,13 +3,15 @@ const textContent = document.querySelector('#text-content');
 
 const textConfigUpdate = JSON.parse(localStorage.getItem('text')) ?? '';
 
-textContent.value = textConfigUpdate.content;
+textConfigUpdate.content?.forEach((text) => {
+  textContent.value += `${text} `;
+});
 
 const handleChange = (e) => {
   e.preventDefault();
 
   const textConfig = {
-    content: textContent.value,
+    content: textContent.value.split(' '),
     fontStyle: '',
     fontSize: '',
     fontColor: '',
@@ -20,6 +22,7 @@ const handleChange = (e) => {
 
 const handleSelection = () => {
   const selection = window.getSelection().toString();
+
   console.log(selection);
 };
 
