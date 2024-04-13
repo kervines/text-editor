@@ -15,3 +15,13 @@ body {
   border: 1px solid black;
   height: 200px;
 }
+
+.bold-class {
+  font-weight: bold;
+}
+.italic-class {
+  font-style: italic;
+}
+.underline-class {
+  text-decoration: underline;
+}
