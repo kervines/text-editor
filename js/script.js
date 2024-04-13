@@ -4,8 +4,10 @@ const textContent = document.querySelector('#input-text');
 const btnBold = document.querySelector('.bold');
 const btnItalic = document.querySelector('.italic');
 const btnUnderline = document.querySelector('.underline');
-
 const buttons = document.querySelectorAll('.edit-container button');
+
+// Regexp
+const regexp = /<[^>]*>([^<]*)<\/[^>]*>/g;
 
 const textConfigUpdate = JSON.parse(localStorage.getItem('text')) ?? '';
 textContent.innerHTML = textConfigUpdate.content ?? '';
@@ -20,10 +22,17 @@ const textConfig = {
 };
 
 const handleKeyup = (e) => {
-  e.preventDefault();
-  textConfig.content = `<span class='${textConfig.fontWeight} ${textConfig.fontStyle} ${textConfig.fontSize}'>${textContent.innerText}</span>`;
+  // textConfig.content = `<span class='${textConfig.fontWeight} ${textConfig.fontStyle} ${textConfig.fontSize}'>${textContent.innerText}</span>`;
+
+  textConfig.content = textContent.innerText;
+  const arr = textConfig.content.split(' ');
+  arr.map((word) => {
+    textConfig.content += `<span class='${textConfig.fontWeight} ${textConfig.fontStyle} ${textConfig.fontSize}'>${word} </span>`;
+  });
+  textConfig.content = textConfig.content.match(regexp).join('');
   localStorage.setItem('text', JSON.stringify(textConfig));
 };
+
 textContent.addEventListener('keyup', handleKeyup);
 
 buttons.forEach((button) => {
