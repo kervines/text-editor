@@ -16,9 +16,9 @@
   <main>
     <form id="form-content" action="">
       <div class="edit-container">
-        <button>Negrito</button>
-        <button>Itálico</button>
-        <button>Sublinhado</button>
+        <button data-btn="bold" class="bold" id="fontWeight">Negrito</button>
+        <button data-btn="italic" class="italic" id="fontStyle">Itálico</button>
+        <button data-btn="underline" class="underline" id="textDecoration">Sublinhado</button>
         <select name="" id="font-size">
           <option value="8px">8px</option>
           <option value="10px">10px</option>
@@ -28,9 +28,8 @@
           <option value="22px">22px</option>
         </select>
       </div>
-      <label for="text-content">Bloco de notas</label>
-      <br>
-      <textarea name="" id="text-content" cols="30" rows="10"></textarea>
+      <div id="input-text" contenteditable="true">
+      </div>
     </form>
   </main>
   <footer></footer>

@@ -8,4 +8,21 @@ body {
   height: 100vh;
   display: grid;
   place-content: center;
+  padding: 1rem;
+}
+
+#input-text {
+  border: 1px solid black;
+  width: 300px;
+  height: 200px;
+}
+
+.bold-class {
+  font-weight: bold;
+}
+.italic-class {
+  font-style: italic;
+}
+.underline-class {
+  text-decoration: underline;
 }

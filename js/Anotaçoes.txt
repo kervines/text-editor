@@ -1,0 +1,27 @@
+// buttons.forEach((button) => {
+//   button.addEventListener('click', (e) => {
+//     if (textConfig[e.target.id] !== '') {
+//       textConfig[e.target.id] = '';
+//       textConfig.content = `<span class='${textConfig.fontWeight} ${textConfig.fontStyle} ${textConfig.textDecoration}'>${textContent.innerText}</span>`;
+//       localStorage.setItem('text', JSON.stringify(textConfig));
+//     } else {
+//       textConfig[e.target.id] = e.target.className + '-class';
+//       textConfig.content = `<span class='${textConfig.fontWeight} ${textConfig.fontStyle} ${textConfig.textDecoration}'>${textContent.innerText}</span>`;
+//       localStorage.setItem('text', JSON.stringify(textConfig));
+//     }
+//   });
+// });
+
+
+// codigo que cria span em cada palavra digitada
+//const handleKeyup = (e) => {
+//   textConfig.content = textContent.innerText;
+//   const arr = textConfig.content.split(' ');
+//   arr.map((word) => {
+//     textConfig.content += `<span class='${textConfig.fontWeight} ${textConfig.fontStyle} ${textConfig.fontSize}'>${word} </span>`;
+//   });
+//   textConfig.content = textConfig.content.match(regexp).join('');
+//   localStorage.setItem('text', JSON.stringify(textConfig));
+// };
+
+// textConfig.content = `<span class='${textConfig.fontWeight} ${textConfig.fontStyle} ${textConfig.fontSize}'>${textContent.innerText} </span>`;
