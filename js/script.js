@@ -6,11 +6,10 @@ const btnItalic = document.querySelector('.italic');
 const btnUnderline = document.querySelector('.underline');
 const buttons = document.querySelectorAll('.edit-container button');
 
-// Regexp
-const regexp = /<[^>]*>([^<]*)<\/[^>]*>/g;
-
 const textConfigUpdate = JSON.parse(localStorage.getItem('text')) ?? '';
-textContent.innerHTML = textConfigUpdate.content ?? '';
+textContent.innerHTML =
+  `<span class='${textConfigUpdate.fontWeight} ${textConfigUpdate.fontStyle} ${textConfigUpdate.fontSize}'> ${textConfigUpdate.content} </span>` ??
+  '';
 
 const textConfig = {
   content: textConfigUpdate.content ?? '',
@@ -22,14 +21,8 @@ const textConfig = {
 };
 
 const handleKeyup = (e) => {
-  // textConfig.content = `<span class='${textConfig.fontWeight} ${textConfig.fontStyle} ${textConfig.fontSize}'>${textContent.innerText}</span>`;
-
+  // textConfig.content = `<span class='${textConfig.fontWeight} ${textConfig.fontStyle} ${textConfig.fontSize}'>${textContent.innerText} </span>`;
   textConfig.content = textContent.innerText;
-  const arr = textConfig.content.split(' ');
-  arr.map((word) => {
-    textConfig.content += `<span class='${textConfig.fontWeight} ${textConfig.fontStyle} ${textConfig.fontSize}'>${word} </span>`;
-  });
-  textConfig.content = textConfig.content.match(regexp).join('');
   localStorage.setItem('text', JSON.stringify(textConfig));
 };
 
@@ -37,25 +30,18 @@ textContent.addEventListener('keyup', handleKeyup);
 
 buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
-    if (textConfig[e.target.id] !== '') {
-      textConfig[e.target.id] = '';
-      textConfig.content = `<span class='${textConfig.fontWeight} ${textConfig.fontStyle} ${textConfig.textDecoration}'>${textContent.innerText}</span>`;
-      localStorage.setItem('text', JSON.stringify(textConfig));
-    } else {
-      textConfig[e.target.id] = e.target.className + '-class';
-      textConfig.content = `<span class='${textConfig.fontWeight} ${textConfig.fontStyle} ${textConfig.textDecoration}'>${textContent.innerText}</span>`;
-      localStorage.setItem('text', JSON.stringify(textConfig));
-    }
+    e.preventDefault();
+    const selection = window.getSelection();
+    const range = selection.getRangeAt(0);
+    document.execCommand(e.target.dataset.btn);
+
+    const text = textContent.innerHTML;
+    const regexp = /<span[^>]*>(.*?)<\/span>/gi;
+    const newText = text.replace(regexp, '$1');
+
+    textConfig.content = `${newText}`;
+    localStorage.setItem('text', JSON.stringify(textConfig));
   });
 });
-
-/*
-Seleçao dos elementos de texto
-const handleSelection = () => {
-  const selection = window.getSelection().toString();
-  console.log(selection);
-};
-textContent.addEventListener('mouseup', handleSelection);
-*/
 
 // formContent.addEventListener('change', handleChange);
