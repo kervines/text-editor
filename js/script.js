@@ -5,27 +5,25 @@ const btnBold = document.querySelector('.bold');
 const btnItalic = document.querySelector('.italic');
 const btnUnderline = document.querySelector('.underline');
 const buttons = document.querySelectorAll('.edit-container button');
+// FontSize
+const fontSizeSelect = document.querySelector('#font-size');
 
+// main
 const textConfigUpdate = JSON.parse(localStorage.getItem('text')) ?? '';
-textContent.innerHTML =
-  `<span class='${textConfigUpdate.fontWeight} ${textConfigUpdate.fontStyle} ${textConfigUpdate.fontSize}'> ${textConfigUpdate.content} </span>` ??
-  '';
+textContent.innerHTML = `<span class='font-size-${
+  textConfigUpdate.fontSize
+}'> ${textConfigUpdate.content ?? ''} </span>`;
 
 const textConfig = {
   content: textConfigUpdate.content ?? '',
-  fontWeight: textConfigUpdate.fontWeight ?? '',
-  fontStyle: textConfigUpdate.fontStyle ?? '',
   fontSize: textConfigUpdate.fontSize ?? '',
-  textDecoration: textConfigUpdate.textDecoration ?? '',
   fontColor: textConfigUpdate.fontColor ?? '',
 };
 
 const handleKeyup = (e) => {
-  // textConfig.content = `<span class='${textConfig.fontWeight} ${textConfig.fontStyle} ${textConfig.fontSize}'>${textContent.innerText} </span>`;
   textConfig.content = textContent.innerText;
   localStorage.setItem('text', JSON.stringify(textConfig));
 };
-
 textContent.addEventListener('keyup', handleKeyup);
 
 buttons.forEach((button) => {
@@ -44,4 +42,9 @@ buttons.forEach((button) => {
   });
 });
 
-// formContent.addEventListener('change', handleChange);
+const handleFontSize = () => {
+  textConfig.fontSize = fontSizeSelect.value;
+  localStorage.setItem('text', JSON.stringify(textConfig));
+  location.reload();
+};
+fontSizeSelect.addEventListener('change', handleFontSize);
