@@ -7,17 +7,22 @@ const btnUnderline = document.querySelector('.underline');
 const buttons = document.querySelectorAll('.edit-container button');
 // FontSize
 const fontSizeSelect = document.querySelector('#font-size');
+// FontFamily
+const fontFamilySelect = document.querySelector('#font-family');
 
 // main
 const textConfigUpdate = JSON.parse(localStorage.getItem('text')) ?? '';
 textContent.innerHTML = `<span class='font-size-${
   textConfigUpdate.fontSize
-}'> ${textConfigUpdate.content ?? ''} </span>`;
+} font-family-${textConfigUpdate.fontFamily}'> ${
+  textConfigUpdate.content ?? ''
+} </span>`;
 
 const textConfig = {
   content: textConfigUpdate.content ?? '',
   fontSize: textConfigUpdate.fontSize ?? '',
   fontColor: textConfigUpdate.fontColor ?? '',
+  fontFamily: textConfigUpdate.fontFamily ?? '',
 };
 
 const handleKeyup = (e) => {
@@ -48,3 +53,10 @@ const handleFontSize = () => {
   location.reload();
 };
 fontSizeSelect.addEventListener('change', handleFontSize);
+
+const handleFontFamily = () => {
+  textConfig.fontFamily = fontFamilySelect.value;
+  localStorage.setItem('text', JSON.stringify(textConfig));
+  location.reload();
+};
+fontFamilySelect.addEventListener('change', handleFontFamily);
