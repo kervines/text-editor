@@ -9,6 +9,8 @@ const buttons = document.querySelectorAll('.edit-container button');
 const fontSizeSelect = document.querySelector('#font-size');
 // FontFamily
 const fontFamilySelect = document.querySelector('#font-family');
+// MainFooter
+const mainFooter = document.querySelector('#main-footer');
 
 // main
 const textConfigUpdate = JSON.parse(localStorage.getItem('text')) ?? '';
@@ -17,6 +19,8 @@ textContent.innerHTML = `<span class='font-size-${
 } font-family-${textConfigUpdate.fontFamily}'> ${
   textConfigUpdate.content ?? ''
 } </span>`;
+
+mainFooter.innerHTML = `<span>${textConfigUpdate.fontFamily}</span> <span>${textConfigUpdate.fontSize}</span>`;
 
 const textConfig = {
   content: textConfigUpdate.content ?? '',
