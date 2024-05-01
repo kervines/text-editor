@@ -5,11 +5,14 @@ const btnBold = document.querySelector('.bold');
 const btnItalic = document.querySelector('.italic');
 const btnUnderline = document.querySelector('.underline');
 const buttons = document.querySelectorAll('.edit-container button');
+// FontSize
+const fontSizeSelect = document.querySelector('#font-size');
 
+// main
 const textConfigUpdate = JSON.parse(localStorage.getItem('text')) ?? '';
-textContent.innerHTML = `<span class='${textConfigUpdate.fontSize}'> ${
-  textConfigUpdate.content ?? ''
-} </span>`;
+textContent.innerHTML = `<span class='font-size-${
+  textConfigUpdate.fontSize
+}'> ${textConfigUpdate.content ?? ''} </span>`;
 
 const textConfig = {
   content: textConfigUpdate.content ?? '',
@@ -39,4 +42,9 @@ buttons.forEach((button) => {
   });
 });
 
-// formContent.addEventListener('change', handleChange);
+const handleFontSize = () => {
+  textConfig.fontSize = fontSizeSelect.value;
+  localStorage.setItem('text', JSON.stringify(textConfig));
+  location.reload();
+};
+fontSizeSelect.addEventListener('change', handleFontSize);
